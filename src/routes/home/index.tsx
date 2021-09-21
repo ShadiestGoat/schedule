@@ -32,7 +32,7 @@ const IndexPage:FunctionComponent = () => {
         schedual = JSON.parse(localStorage.getItem('sch') ?? '{}')
     }
 
-    if (Object.keys(schedual.aliases).length == 0) return <div class="col">
+    if (Object.keys(schedual.aliases).length == 0) return <div style={{marginTop: "35vh"}} class="col">
         <h1>You have no classes added!</h1>
     </div>
 
