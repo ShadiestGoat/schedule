@@ -31,6 +31,11 @@ const IndexPage:FunctionComponent = () => {
         } as schedualTot))
         schedual = JSON.parse(localStorage.getItem('sch') ?? '{}')
     }
+
+    if (Object.keys(schedual.aliases).length == 0) return <div class="col">
+        <h1>You have no classes added!</h1>
+    </div>
+
     const newN = ():number => Date.now() //used for testing stuff easier
 
     const [now, setNow] = useState<number>(newN() - new Date().setHours(0, 0, 0, 0))
@@ -84,7 +89,7 @@ const IndexPage:FunctionComponent = () => {
         day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'][new Date().getDay() - (getOffset(schedual.times[0][0]) > now ? 1 : 0)] as keyof schedualTot['layout']
         if (Object.keys(schedual.layout).includes(day)) {
             const { location, subject, study } = schedual.layout[day][0]
-            const { teacher, fullName } = schedual.aliases[subject]
+            const { teacher, fullName } = schedual.aliases[subject] ?? {}
             nextClass = {
                 location,
                 name: fullName,
