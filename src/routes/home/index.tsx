@@ -32,10 +32,6 @@ const IndexPage:FunctionComponent = () => {
         schedual = JSON.parse(localStorage.getItem('sch') ?? '{}')
     }
 
-    if (Object.keys(schedual.aliases).length == 0) return <div style={{marginTop: "35vh"}} class="col">
-        <h1>You have no classes added!</h1>
-    </div>
-
     const newN = ():number => Date.now() //used for testing stuff easier
 
     const [now, setNow] = useState<number>(newN() - new Date().setHours(0, 0, 0, 0))
@@ -120,7 +116,7 @@ const IndexPage:FunctionComponent = () => {
         after = nextClass.breakName ? genClass(period.p + 1, period.i + 2) : undefined
     }
 
-    return <DisplayComp after={after} current={curClass} next={nextClass} />
+    return <DisplayComp notInited={Object.keys(schedual.aliases).length == 0}  after={after} current={curClass} next={nextClass} />
 }
 
 export default IndexPage
