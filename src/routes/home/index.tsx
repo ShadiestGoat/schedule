@@ -101,7 +101,7 @@ const IndexPage:FunctionComponent = () => {
             if (i - 1 > schedual.layout.friday.length) return homeClass
             if (schedual.times[i].length == 3 && schedual.times[i][2]) return Object.assign(breakClass, {breakName: schedual.times[i][2]})
             const { location, subject, study } = schedual.layout[day][p]
-            const { teacher, fullName } = schedual.aliases[subject]
+            const { teacher, fullName } = schedual.aliases[subject] ?? {}
             return {
                 location,
                 name: fullName,
