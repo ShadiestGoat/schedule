@@ -238,7 +238,7 @@ const SchedualCreator:FunctionComponent = () => {
                 if (vertDay == "times") return <div class="row" style={{justifyContent:"space-between", marginTop: "4vh"}}>
                     {times[i].length == 3 ?
                         <label style={{width: "13vw", margin: "0px auto", height: "3.9vh"}}>
-                            <input value={times[i][2]} onInput={(e):void => {
+                            <input value={times[i][2]} style={{width: "100%", height: "100%"}} onInput={(e):void => {
                                 const t = [...times]
                                 t[i][2] = (e.target as HTMLInputElement)?.value
                                 setTimes(t)
