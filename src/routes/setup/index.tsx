@@ -117,12 +117,12 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
     </div>
 </div> : <div onClick={():void => {
         onSelect()
-    }} class={`row ${style.selectMenu}`} style={{width: useBig ? "17vw" : ''}}>
+    }} class={`row ${style.selectMenu}`} style={{width: useBig ? "22vw" : ''}}>
         {
             <div style={{position: "absolute", zIndex: "99", height: `${selected ? (options.length + 1) * 2.5 : 2.5}vh`}} class="col"> {
                 selected ? <Fragment>
                                 {options.map((v, i) => {
-                return <div key={`mn-${v}-${p}-${day}`} style={Object.assign({borderRadius: "0px", height: "2.5vh", width: useBig ? "17vw" : ""}, !i ? {borderTopLeftRadius: "6.25px", borderTopRightRadius: "6.25px"} : {}, v == selectedOption ? {boxShadow: "0px 0px 15px 1px #207a91"} : {})} class={`row ${style.selectMenu} ${style.menuRow}`}>
+                return <div key={`mn-${v}-${p}-${day}`} style={Object.assign({borderRadius: "0px", height: "2.5vh", width: useBig ? "22vw" : ""}, !i ? {borderTopLeftRadius: "6.25px", borderTopRightRadius: "6.25px"} : {}, v == selectedOption ? {boxShadow: "0px 0px 15px 1px #207a91"} : {})} class={`row ${style.selectMenu} ${style.menuRow}`}>
                     {useBig ? <h3 style={{fontSize: "2vw", width: "55%"}} onClick={():void => {
                         console.log('b', selected)
                         onItemSelected(v)
@@ -153,7 +153,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                     </div>
                     </div>
             })}
-                <div class={`row ${style.selectMenu} ${style.menuRow}`} style={Object.assign({borderRadius: "0px", marginTop: "0px", borderBottomLeftRadius: "6.25px", borderBottomRightRadius: "6.25px", borderTop: "white solid 2px", paddingBottom: useBig ? "25px" : "3px"}, useBig ? {width: "17vw", height: "2.5vh"} : {})}>
+                <div class={`row ${style.selectMenu} ${style.menuRow}`} style={Object.assign({borderRadius: "0px", marginTop: "0px", borderBottomLeftRadius: "6.25px", borderBottomRightRadius: "6.25px", borderTop: "white solid 2px", paddingBottom: useBig ? "25px" : "3px"}, useBig ? {width: "22vw", height: "2.5vh"} : {})}>
                 {useBig ?
                     <h3 style={{fontSize: "2vw"}}
                     onClick={():void => {
@@ -222,13 +222,13 @@ const SchedualCreator:FunctionComponent = () => {
                 {['times'].concat(Object.keys(layout)).map(day => <option key={`opt-${day}`} value={day}>{day[0].toUpperCase() + day.substr(1)}</option>
                 )}
             </select>
-            <div class={vertDay == "times" ? "col" : ""} style={{width: vertDay == "times" ? "60vw" : "100%", marginTop: "6vh"}}>
+            <div class={vertDay == "times" ? "col" : ""} style={{width: vertDay == "times" ? "80vw" : "100%", marginTop: "6vh"}}>
                 {vertDay == "times" ?
                     <div style={{justifyContent:"space-between"}} class="row">
-                        <h2 style={{width: "15vw", fontSize: "3.5vw"}}>Period</h2>
-                        <h2 style={{width: "15vw", fontSize: "3.5vw"}}>Break</h2>
-                        <h2 style={{width: "15vw", fontSize: "3.5vw"}}>Start</h2>
-                        <h2 style={{width: "15vw", fontSize: "3.5vw"}}>End</h2>
+                        <h2 style={{width: "20vw", fontSize: "3.5vw"}}>Period</h2>
+                        <h2 style={{width: "20vw", fontSize: "3.5vw"}}>Break</h2>
+                        <h2 style={{width: "20vw", fontSize: "3.5vw"}}>Start</h2>
+                        <h2 style={{width: "20vw", fontSize: "3.5vw"}}>End</h2>
                 </div> : <Fragment />}
         {
             times.map((v, i) => {
@@ -237,7 +237,7 @@ const SchedualCreator:FunctionComponent = () => {
                 shI[i] = breaks
                 if (vertDay == "times") return <div class="row" style={{justifyContent:"space-between", marginTop: "4vh"}}>
                     {times[i].length == 3 ?
-                        <label style={{width: "13vw", margin: "0px auto", height: "3.9vh"}}>
+                        <label style={{width: "18vw", margin: "0px auto", height: "3.9vh"}}>
                             <input value={times[i][2]} style={{width: "100%", height: "100%"}} onInput={(e):void => {
                                 const t = [...times]
                                 t[i][2] = (e.target as HTMLInputElement)?.value
@@ -245,9 +245,9 @@ const SchedualCreator:FunctionComponent = () => {
                                 save()
                             }} />
                         </label>
-                    : <h2 style={{width: "15vw"}}>{i-shI[i] + 1}</h2>}
+                    : <h2 style={{width: "20vw"}}>{i-shI[i] + 1}</h2>}
 
-                    <input style={{width: "13vw", height: "3vw", margin: "auto 1vw"}}
+                    <input style={{width: "18vw", height: "3vw", margin: "auto 1vw"}}
                         type="checkbox"
                         checked={times[i].length == 3}
                         onClick={():void => {
@@ -259,13 +259,13 @@ const SchedualCreator:FunctionComponent = () => {
                             save()
                     }} />
 
-                    <input style={{width: "13vw", margin: "0px 1vw"}} class={style.clock} value={v[0]} onInput={(e):void => {
+                    <input style={{width: "18vw", margin: "0px 1vw"}} class={style.clock} value={v[0]} onInput={(e):void => {
                         const newArr= times.splice(0)
                         newArr[i][0] = (e.target as HTMLInputElement).value
                         setTimes(newArr)
                         save()
                     }} type="time" />
-                    <input style={{width: "13vw", margin: "0px 1vw"}} step="300" class={style.clock} value={v[1]} onInput={(e):void => {
+                    <input style={{width: "18vw", margin: "0px 1vw"}} step="300" class={style.clock} value={v[1]} onInput={(e):void => {
                         const newArr= times.splice(0)
                         newArr[i][1] = (e.target as HTMLInputElement).value
                         setTimes(newArr)
@@ -283,7 +283,7 @@ const SchedualCreator:FunctionComponent = () => {
                                 setLayout(newSh)
                                 save()
                             }}> Study </h2>
-                            <input value={layout[vertDay as keyof schedualTot['layout']][i - breaks].location} style={{width: "13vw", outline: "0px", height: "3vw", fontSize: "2vw"}} />
+                            <input value={layout[vertDay as keyof schedualTot['layout']][i - breaks].location} style={{width: "18vw", outline: "0px", height: "3vw", fontSize: "2vw"}} />
                         </div>
                         <div class="row" style={{justifyContent: "center", marginTop: "1vh"}}>
                             <input
