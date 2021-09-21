@@ -131,7 +131,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                     <h6 style={{width: "55%"}} onClick={():void => {
                         onItemSelected(v)
                     }}>{v}</h6>}
-                    <div style={{width: "45%"}}>
+                    <div style={{width: "45%", display: "flex", justifyContent: "space-evenly"}}>
                         <svg height={"100%"} style={{fill: "#fff"}} onClick={():void => {
                             setInfo({
                                 id: v,
