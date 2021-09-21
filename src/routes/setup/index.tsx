@@ -80,8 +80,8 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
         <div ref={refMenu} class={`row ${style.menuOpen}`}>
             <div class="col">
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
-                    <h4> Id </h4>
-                    <input value={menuInfo.id} onInput={(e):void => {
+                    <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}> Id </h4>
+                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%"}}  value={menuInfo.id} onInput={(e):void => {
                         if (!menuInfo.n) return
                         const sh = {...menuInfo}
                         sh.id = (e.target as HTMLInputElement).value
@@ -89,16 +89,16 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                     }} disabled={!menuInfo.n} />
                 </label>
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
-                    <h4>Teacher </h4>
-                    <input value={menuInfo.newInfo.teacher} onInput={(e):void => {
+                    <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Teacher </h4>
+                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%"}} value={menuInfo.newInfo.teacher} onInput={(e):void => {
                         const newS = {...menuInfo}
                         newS.newInfo.teacher = (e.target as HTMLInputElement).value
                         setInfo(newS)
                     }} />
                 </label>
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
-                    <h4>Class Name </h4>
-                    <input value={menuInfo.newInfo.class} onInput={(e):void => {
+                    <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Class Name </h4>
+                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%"}}  value={menuInfo.newInfo.class} onInput={(e):void => {
                         const newS = {...menuInfo}
                         newS.newInfo.class = (e.target as HTMLInputElement).value
                         setInfo(newS)
