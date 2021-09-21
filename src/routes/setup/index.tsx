@@ -1,7 +1,7 @@
 import { Fragment, FunctionComponent } from "preact";
 import { Link } from "preact-router";
 import { useCallback, useRef, useState } from "preact/hooks";
-import { getV, schedualTot, timePeriod, useGlobalListener, useOnClickOutside } from "../../tools"
+import { getV, schedualTot, timePeriod, unknownClass, useGlobalListener, useOnClickOutside } from "../../tools"
 import style from "./style.css"
 
 type MenuInfo = {on:boolean, id: string, date: number, n: boolean, newInfo: {teacher: string, class: string}}
@@ -14,7 +14,7 @@ function addClass(layout:schedualTot['layout'], times:schedualTot['times'], p: n
     const t = [...times]
     t[i].pop()
     Object.keys(newSh).forEach(day => {
-        newSh[day as keyof schedualTot['layout']].splice(p + 1, 0, {location: "", subject: "unknown"})
+        newSh[day as keyof schedualTot['layout']].splice(p + 1, 0, unknownClass)
     })
     return {
         newT: t,

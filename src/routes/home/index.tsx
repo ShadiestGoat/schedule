@@ -2,18 +2,36 @@ import { FunctionComponent, } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import "../../animations.css"
 import DisplayComp from "../../components/display";
-import { breakClass, fullClassInfo, homeClass, schedualTot, testSchechual, weekend } from "../../tools";
+import { breakClass, fullClassInfo, homeClass, schedualTot, unknownClass, weekend } from "../../tools";
 
 
 const IndexPage:FunctionComponent = () => {
-    // let schedual:schedualTot = JSON.parse(localStorage.getItem('sch') ?? '{}')
-    // if (Object.keys(schedual).length == 0) {
-    //     localStorage.setItem('sch', JSON.stringify(testSchechual))
-    //     schedual = testSchechual
-    // }
+    let schedual:schedualTot = JSON.parse(localStorage.getItem('sch') ?? '{}')
+    if (Object.keys(schedual).length == 0) {
+        const day = [unknownClass, unknownClass, unknownClass, unknownClass, unknownClass, unknownClass]
+        localStorage.setItem('sch', JSON.stringify({
+            aliases: {},
+            layout: {
+                friday: day,
+                monday: day,
+                thursday: day,
+                tuesday: day,
+                wednesday: day
+            },
+            times: [
+                ['08:35', '09:30'],
+                ['09:30', '10:30'],
+                ['10:30', '10:50', "Break"],
+                ['10:50', '11:45'],
+                ['11:45', '12:45'],
+                ['12:45', '13:45', "Lunch"],
+                ['13:45', '14:40'],
+                ['14:40', '15:40'],
+            ],
+        } as schedualTot))
+        schedual = JSON.parse(localStorage.getItem('sch') ?? '{}')
+    }
     const newN = ():number => Date.now() //used for testing stuff easier
-
-    const schedual = testSchechual
 
     const [now, setNow] = useState<number>(newN() - new Date().setHours(0, 0, 0, 0))
     const nowRef = useRef<NodeJS.Timeout>();
