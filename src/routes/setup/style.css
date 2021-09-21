@@ -1,0 +1,68 @@
+.selectMenu {
+    width: 7.5vw;
+    background-color: #207a91;
+    border-radius: 6.5px;
+}
+
+.menuRow {
+    animation: transitmenu 0.75s;
+}
+
+.menuOpen {
+    z-index: 4;
+    position: absolute;
+    top: 25vh;
+    left: 30vw;
+    width: 40vw;
+    height: 25vh;
+    background-color: #202124;
+    animation: transitmenu 1s;
+}
+
+.clock {
+    color: var(--ico);
+    background-color: var(--main);
+    border-width: 1px;
+    border-color: var(--ico);
+    border-radius: 6.2px;
+}
+
+.clock::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+@keyframes transitmenu {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes opac {
+    from {
+        opacity: 0;
+        height: 0vh;
+        top: 60vh;
+    }
+    to {
+        opacity: 0.8;
+        top: 0vh;
+        height: 100vh;
+    }
+}
+
+.backDrop {
+    z-index: 3;
+    opacity: 0.8;
+    background-color: #000;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    animation: opac 1s;
+}

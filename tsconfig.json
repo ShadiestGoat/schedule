@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",                       /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+        "allowJs": true,                          /* Allow javascript files to be compiled. */
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact",
+        "noEmit": true,                           /* Do not emit outputs. */
+        "strict": true,                           /* Enable all strict type-checking options. */
+        "moduleResolution": "node",               /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+        "esModuleInterop": true,
+        "skipLibCheck": true,                      /* Skip type checking of declaration files. */
+        "allowUnusedLabels": false
+    },
+    "include": [ "src/**/*" ]
+}

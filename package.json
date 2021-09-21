@@ -1,0 +1,54 @@
+{
+  "private": true,
+  "name": "shady-schedual",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "preact build --no-prerender",
+    "serve": "sirv build --port 5232 --cors --single --host",
+    "dev": "preact watch",
+    "lint": "eslint 'src/**/*.{ts,tsx}'"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "preact",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "warn",
+      "@typescript-eslint/consistent-type-assertions": "warn",
+      "@typescript-eslint/ban-tslint-comment": "error",
+      "radix": "off"
+    },
+    "ignorePatterns": [
+      "dist/",
+      "build/"
+    ]
+  },
+  "dependencies": {
+    "dayjs": "^1.10.6",
+    "postcss": "^8.0.0",
+    "preact": "^10.5.13",
+    "preact-cli": "^3.2.2",
+    "preact-render-to-string": "^5.1.4",
+    "preact-router": "^3.2.1",
+    "sirv-cli": "^1.0.0-next.3",
+    "socket.io-client": "^4.1.2",
+    "universal-cookie": "^4.0.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "autoprefixer": "^9.8.6",
+    "eslint": "^6.8.0",
+    "eslint-config-preact": "^1.1.1",
+    "eslint-plugin-compat": "^3.11.1",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.0.6",
+    "typescript": "^4.2.3"
+  }
+}

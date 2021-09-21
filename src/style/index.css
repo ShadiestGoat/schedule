@@ -1,0 +1,176 @@
+:root {
+   --ico: rgb(255, 255, 255);
+   --secondary: #2d2d2d;
+   --disabled: #9191a1;
+   --main: #202124;
+   background-color: var(--main);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem var(--spacer-4);
+    text-align: center;
+    vertical-align: middle;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 0;
+    border-radius: 12.25px;
+    transition-timing-function: ease;
+    transition-duration: 0.4s;
+    transition-property: color, background-color;
+    color: var(--ico);
+    padding: 1rem 2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
+}
+
+.btn-d {
+    background-color: #d42738;
+}
+.text-danger {
+    color: #d42738
+}
+.btn-d.active,
+.btn-d.show,
+.btn-d:active,
+.btn-d:hover
+{
+    background-color: #ae1c2b;
+}
+
+.btn-p {
+    background-color: #6f42c2;
+}
+
+.btn-p.active,
+.btn-p.show,
+.btn-p:active,
+.btn-p:hover {
+    background-color: #5729ac;
+}
+
+::selection {
+    background: #6d10ff;
+}
+::-moz-selection {
+    background: #6d10ff;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    color: var(--ico);
+    margin: 0.25vh 0 0 0;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.4;
+}
+
+body {
+    margin: 0;
+    font: 500 1rem/1.5 Inter, sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 1300px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1525px) {
+    body {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1600px) {
+    body {
+        font-size: 21px;
+    }
+}
+
+@media (min-width: 1675px) {
+    body {
+        font-size: 23px;
+    }
+}
+
+@media (min-width: 1750px) {
+    body {
+        font-size: 23px;
+    }
+}
+
+h1 {
+    font-size: 2.7rem;
+}
+
+button {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0;
+    justify-content: center;
+}
+
+.bar {
+    background-color: #fff;
+    opacity: 10%;
+    border-radius: 12.25px;
+}
+
+input {
+    outline: 0px;
+    text-align: center;
+}
+
+select {
+    outline: 0px;
+    text-align: center;
+}
