@@ -77,44 +77,44 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
 
     return <div ref={refClick} > {menuInfo.on ? <div>
     <div class={style.backDrop} />
-    <div ref={refMenu} class={`row ${style.menuOpen}`}>
-        <div class="col" >
-            <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
-                <h4> Id </h4>
-                <input value={menuInfo.id} onInput={(e):void => {
-                    if (!menuInfo.n) return
-                    const sh = {...menuInfo}
-                    sh.id = (e.target as HTMLInputElement).value
-                    setInfo(sh)
-                }} disabled={!menuInfo.n} />
-            </label>
-            <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
-                <h4>Teacher </h4>
-                <input value={menuInfo.newInfo.teacher} onInput={(e):void => {
-                    const newS = {...menuInfo}
-                    newS.newInfo.teacher = (e.target as HTMLInputElement).value
-                    setInfo(newS)
-                }} />
-            </label>
-            <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
-                <h4>Class Name </h4>
-                <input value={menuInfo.newInfo.class} onInput={(e):void => {
-                    const newS = {...menuInfo}
-                    newS.newInfo.class = (e.target as HTMLInputElement).value
-                    setInfo(newS)
-                }} />
-            </label>
-            <div class="row" style={{marginTop: "2vh"}}>
-                <div class="btn btn-p" onClick={():void => {
-                    if (menuInfo.id.trim()) onUpdateAlias(menuInfo.id, {
-                        fullName: menuInfo.newInfo.class,
-                        teacher: menuInfo.newInfo.teacher
-                    })
-                    setInfo({date: 0, id: "", on: false, n: false, newInfo: {teacher: "", class: ""}})
-                }}>{menuInfo.n ? "Save" : "Update"}</div>
+        <div ref={refMenu} class={`row ${style.menuOpen}`}>
+            <div class="col">
+                <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
+                    <h4> Id </h4>
+                    <input value={menuInfo.id} onInput={(e):void => {
+                        if (!menuInfo.n) return
+                        const sh = {...menuInfo}
+                        sh.id = (e.target as HTMLInputElement).value
+                        setInfo(sh)
+                    }} disabled={!menuInfo.n} />
+                </label>
+                <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
+                    <h4>Teacher </h4>
+                    <input value={menuInfo.newInfo.teacher} onInput={(e):void => {
+                        const newS = {...menuInfo}
+                        newS.newInfo.teacher = (e.target as HTMLInputElement).value
+                        setInfo(newS)
+                    }} />
+                </label>
+                <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
+                    <h4>Class Name </h4>
+                    <input value={menuInfo.newInfo.class} onInput={(e):void => {
+                        const newS = {...menuInfo}
+                        newS.newInfo.class = (e.target as HTMLInputElement).value
+                        setInfo(newS)
+                    }} />
+                </label>
+                <div class="row" style={{marginTop: "2vh"}}>
+                    <div class="btn btn-p" onClick={():void => {
+                        if (menuInfo.id.trim()) onUpdateAlias(menuInfo.id, {
+                            fullName: menuInfo.newInfo.class,
+                            teacher: menuInfo.newInfo.teacher
+                        })
+                        setInfo({date: 0, id: "", on: false, n: false, newInfo: {teacher: "", class: ""}})
+                    }}>{menuInfo.n ? "Save" : "Update"}</div>
+                </div>
             </div>
         </div>
-    </div>
 </div> : <div onClick={():void => {
         onSelect()
     }} class={`row ${style.selectMenu}`} style={{width: useBig ? "22vw" : ''}}>
@@ -132,7 +132,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                         onItemSelected(v)
                     }}>{v}</h6>}
                     <div style={{width: "45%"}}>
-                        <svg width={"50%"} style={{fill: "#fff"}} onClick={():void => {
+                        <svg height={"100%"} style={{fill: "#fff"}} onClick={():void => {
                             setInfo({
                                 id: v,
                                 on: true,
@@ -147,7 +147,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                             <path strokeWidth="0.5" d="m23.39 1.992-1.384-1.384c-0.1434-0.1433-0.3757-0.1433-0.5191 0l-2.508 2.508-0.7785-0.7785c-0.06886-0.06887-0.1622-0.1075-0.2596-0.1075s-0.1906 0.03868-0.2596 0.1075l-1.497 1.497c-0.2971-0.1966-0.646-0.3023-1.012-0.3023-0.4913 0-0.9522 0.1903-1.298 0.5357l-4.973 4.973c-0.1433 0.1433-0.1433 0.3757 0 0.519 0.07165 0.0717 0.1656 0.1075 0.2595 0.1075s0.1879-0.0358 0.2595-0.1075l4.973-4.973c0.2068-0.2068 0.4833-0.3207 0.7785-0.3207 0.1671 0 0.3276 0.03769 0.4734 0.1068l-11.72 11.72c-0.00145 0.0014-0.00261 3e-3 -4e-3 0.0044-0.00503 0.0053-0.00993 0.01065-0.01473 0.01631-0.00368 0.0043-0.00727 0.0086-0.01078 0.01299-0.00359 0.0046-0.00701 0.0094-0.01038 0.01415-0.00409 0.0058-0.00814 0.01163-0.01186 0.01765-0.00111 0.0017-0.00239 0.0034-0.00346 0.0052l-2.595 4.325c-0.08666 0.1444-0.06392 0.3293 0.05521 0.4484l0.1003 0.1003-0.6193 0.6193c-0.4217 0.4217-0.4217 1.108 0 1.53 0.2109 0.2109 0.4879 0.3163 0.7648 0.3163 0.2769 0 0.554-0.1054 0.7648-0.3163l0.6193-0.6194 0.1003 0.1003c0.07075 0.07075 0.1647 0.1075 0.2596 0.1075 0.06482 0 0.1301-0.01712 0.1887-0.05233l4.325-2.595c0.00152-9.39e-4 0.00283-2e-3 0.00436-0.0029 0.0067-0.0042 0.01325-0.0086 0.01972-0.01321 0.00404-0.0029 0.00814-0.0058 0.01208-0.0088 0.00508-0.0039 0.01006-0.0081 0.015-0.01249 0.00485-0.0042 0.00966-0.0084 0.01419-0.01285 0.00175-0.0016 0.00364-0.0031 0.00535-0.0049 8.875e-4 -9.58e-4 13.75-13.75 13.75-13.75 0.1433-0.1433 0.1433-0.3757 0-0.519l-0.7785-0.7786 2.508-2.508c0.1433-0.1433 0.1433-0.3757 4.5e-5 -0.519zm-21.57 20.67c-0.06568 0.06564-0.1529 0.1018-0.2458 0.1018-0.09285 0-0.1801-0.03616-0.2458-0.1018-0.06563-0.06567-0.1018-0.1529-0.1018-0.2458 0-0.09285 0.03616-0.1801 0.1018-0.2458l0.6193-0.6193 0.4915 0.4915zm5.824-3.374-0.4325-0.4325c-0.1433-0.1433-0.3757-0.1433-0.519 0-0.1433 0.1433-0.1433 0.3757 0 0.519l0.3596 0.3596-3.677 2.206-1.325-1.325 2.206-3.677 1.398 1.398c0.07165 0.07169 0.1656 0.1075 0.2595 0.1075 0.09389 0 0.1879-0.0358 0.2595-0.1075 0.1433-0.1433 0.1433-0.3757 0-0.519l-1.471-1.471 11.5-11.5 2.941 2.941zm13.23-13.23-1.211 1.211-2.941-2.941 1.211-1.211 0.7779 0.7779c0.0012 0.00127 1.384 1.384 1.384 1.384 0.0011 0.00109 0.7792 0.7792 0.7792 0.7792zm-0.5191-1.557-0.8651-0.8651 2.249-2.249 0.8651 0.8651z" />
                         </svg>
 
-                        <svg width={"50%"}style={{fill: "#fff"}} onClick={():void => {remove(v)}} role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg height={"100%"}style={{fill: "#fff"}} onClick={():void => {remove(v)}} role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeWidth="0.25" d="m15.37 12 7.43-7.427c0.9329-0.9328 0.9329-2.438 0-3.371-0.9329-0.9328-2.438-0.9328-3.371 0l-7.43 7.427-7.428-7.428c-0.9329-0.9328-2.438-0.9328-3.371 0-0.9329 0.9328-0.9329 2.438 0 3.371l7.43 7.427-7.43 7.427c-0.9329 0.9328-0.9329 2.438 0 3.371 0.9347 0.9328 2.445 0.9328 3.371 0l7.43-7.427 7.43 7.427c0.9329 0.9328 2.438 0.9328 3.371 0 0.9256-0.9328 0.9256-2.438-0.0086-3.373z" />
                         </svg>
                     </div>
