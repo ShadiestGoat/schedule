@@ -283,7 +283,12 @@ const SchedualCreator:FunctionComponent = () => {
                                 setLayout(newSh)
                                 save()
                             }}> Study </h2>
-                            <input value={layout[vertDay as keyof schedualTot['layout']][i - breaks].location} style={{width: "18vw", outline: "0px", height: "3vw", fontSize: "2vw"}} />
+                            <input onInput={(e):void => {
+                                const newSh = {...layout}
+                                newSh[vertDay as keyof schedualTot['layout']][i - shI[i]].location = (e.target as HTMLInputElement).value
+                                setLayout(newSh)
+                                save()
+                            }} value={layout[vertDay as keyof schedualTot['layout']][i - breaks].location} style={{width: "18vw", outline: "0px", height: "3vw", fontSize: "2vw"}} />
                         </div>
                         <div class="row" style={{justifyContent: "center", marginTop: "1vh"}}>
                             <input
@@ -427,6 +432,7 @@ const SchedualCreator:FunctionComponent = () => {
                             <input style={{borderRadius: "6.25px", width: "4vw", marginBottom: "0.5vh"}} value={layout[day][i - shI[i]].location} onInput={(e):void => {
                                 const newSh = {...layout}
                                 newSh[day][i - shI[i]].location = (e.target as HTMLInputElement).value
+                                console.log(newSh[day][i - shI[i]].location)
                                 setLayout(newSh)
                                 save()
                             }} />
