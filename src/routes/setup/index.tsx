@@ -90,7 +90,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                 </label>
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
                     <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Teacher </h4>
-                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%"}} value={menuInfo.newInfo.teacher} onInput={(e):void => {
+                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}} value={menuInfo.newInfo.teacher} onInput={(e):void => {
                         const newS = {...menuInfo}
                         newS.newInfo.teacher = (e.target as HTMLInputElement).value
                         setInfo(newS)
@@ -98,7 +98,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                 </label>
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
                     <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Class Name </h4>
-                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%"}}  value={menuInfo.newInfo.class} onInput={(e):void => {
+                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}}  value={menuInfo.newInfo.class} onInput={(e):void => {
                         const newS = {...menuInfo}
                         newS.newInfo.class = (e.target as HTMLInputElement).value
                         setInfo(newS)
