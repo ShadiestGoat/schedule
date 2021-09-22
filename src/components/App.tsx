@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from 'preact';
-import { Route, Router } from 'preact-router';
+import { Link, Route, Router } from 'preact-router';
 import IndexPage from '../routes/home';
 import NotFoundPage from '../routes/notfound';
 import SchedualCreator from '../routes/setup';

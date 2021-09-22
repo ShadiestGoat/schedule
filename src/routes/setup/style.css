@@ -12,10 +12,10 @@
 .menuOpen {
     z-index: 4;
     position: absolute;
-    top: 25vh;
+    top: 20vh;
     left: 20vw;
     width: 60vw;
-    height: 25vh;
+    height: 40vh;
     background-color: #202124;
     animation: transitmenu 1s;
 }

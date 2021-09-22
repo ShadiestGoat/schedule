@@ -77,7 +77,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
 
     return <div ref={refClick} style={useBig ? {width: "25vw", height: "100%"} : {height: "100%", width: "7.5vw"}} > {menuInfo.on ? <div>
     <div class={style.backDrop} />
-        <div ref={refMenu} class={`row ${style.menuOpen}`}>
+        <div ref={refMenu} class={`row ${style.menuOpen}`} style={{height: "30vh", top: "25vh"}}>
             <div class="col">
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
                     <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}> Id </h4>
@@ -193,6 +193,13 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
 }
 
 const SchedualCreator:FunctionComponent = () => {
+    if (location.search.substr(5)) {
+        try {
+            const res = decodeURI(location.search.substr(5))
+            JSON.parse(res)
+            localStorage.setItem("sch", res)
+        } catch {}
+    }
     let breaks = 0
     const shI:Record<number, number> = {}
     const [times, setTimes] = useState<timePeriod[]>(JSON.parse(localStorage.getItem('sch') ?? "{}").times)
@@ -207,12 +214,14 @@ const SchedualCreator:FunctionComponent = () => {
         setVerticalMode(getV())
     })
 
+    const makeSch = useCallback(() => JSON.stringify({
+        aliases: classes,
+        layout,
+        times
+    }), [classes, layout, times])
+
     const save = useCallback(() => {
-        localStorage.setItem('sch', JSON.stringify({
-            aliases: classes,
-            layout,
-            times
-        } as schedualTot))
+        localStorage.setItem('sch', makeSch())
     }, [times, layout, classes])
 
     const days:(keyof schedualTot['layout'])[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
@@ -475,6 +484,13 @@ const SchedualCreator:FunctionComponent = () => {
             }
         </div>
     </div>}
+    {
+        (vertMode && vertDay != "times") ? <Fragment /> :
+        <div class="col" style={{marginTop: vertMode ?  "7vh" : "2.5vh"}}>
+            <p>{`Share your schedule`}</p>
+            <input disabled={false} style={{fontSize: "90%", color: "#ffffff6b", background: "transparent", overflowY: "hidden", width: "95vw", margin: "0.5vh auto", overflowX: "scroll", height: "3vh",}} value={`${location.origin}${location.pathname}?ins=${encodeURI(makeSch())}`} />
+        </div>
+    }
     <Link href="/" alt="Home">
         <svg style={{top: `1vh`, left: `1vw`, position: "absolute", fill: "#fff"}} width="4vh" height="4vh" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="m21.31 3.797h-2.364l0.0099 2.867 2.354 1.998zm-21.17 8.314s0.7512 1.386 2.393 0l9.805-8.295 9.192 8.243c1.899 1.37 2.611 0 2.611 0l-11.8-10.69zm3.263 9.985s-0.02183 0.5366 0.5029 0.5366c0.653 0 6.05-0.0073 6.05-0.0073l0.0091-4.957s-0.08549-0.8167 0.7066-0.8167h2.511c0.9376 0 0.8803 0.8167 0.8803 0.8167l-0.01087 4.942h5.922c0.6657 0 0.6357-0.6675 0.6357-0.6675v-9.141l-8.347-7.424-8.86 7.425v9.294z" strokeWidth="0.25" />

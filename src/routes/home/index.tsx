@@ -12,11 +12,11 @@ const IndexPage:FunctionComponent = () => {
         localStorage.setItem('sch', JSON.stringify({
             aliases: {},
             layout: {
-                friday: day,
                 monday: day,
-                thursday: day,
                 tuesday: day,
-                wednesday: day
+                wednesday: day,
+                thursday: day,
+                friday: day,
             },
             times: [
                 ['08:35', '09:30'],
