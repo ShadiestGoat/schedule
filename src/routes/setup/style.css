@@ -1,7 +1,8 @@
 .selectMenu {
-    width: 7.5vw;
+    width: 101%;
     background-color: #207a91;
     border-radius: 6.5px;
+    height: 100%;
 }
 
 .menuRow {

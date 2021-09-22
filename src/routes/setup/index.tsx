@@ -75,7 +75,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
         if (selected) deselect()
     })
 
-    return <div ref={refClick} > {menuInfo.on ? <div>
+    return <div ref={refClick} style={useBig ? {width: "25vw", height: "100%"} : {height: "100%", width: "7.5vw"}} > {menuInfo.on ? <div>
     <div class={style.backDrop} />
         <div ref={refMenu} class={`row ${style.menuOpen}`}>
             <div class="col">
@@ -117,13 +117,13 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
         </div>
 </div> : <div onClick={():void => {
         onSelect()
-    }} class={`row ${style.selectMenu}`} style={{width: useBig ? "22vw" : ''}}>
+    }} class={`row ${style.selectMenu}`}>
         {
-            <div style={{position: "absolute", zIndex: "99", height: `${selected ? (options.length + 1) * 2.5 : 2.5}vh`}} class="col"> {
+            <div style={{position: "absolute", zIndex: "99", height: `${selected ? (options.length + 1) * 2.5 : 2.5}vh`, width: useBig ? "26vw" : "7.6vw"}} class="col"> {
                 selected ? <Fragment>
                                 {options.map((v, i) => {
-                return <div key={`mn-${v}-${p}-${day}`} style={Object.assign({borderRadius: "0px", height: "2.5vh", width: useBig ? "22vw" : ""}, !i ? {borderTopLeftRadius: "6.25px", borderTopRightRadius: "6.25px"} : {}, v == selectedOption ? {boxShadow: "0px 0px 15px 1px #207a91"} : {})} class={`row ${style.selectMenu} ${style.menuRow}`}>
-                    {useBig ? <h3 style={{fontSize: "2vw", width: "55%"}} onClick={():void => {
+                return <div key={`mn-${v}-${p}-${day}`} style={Object.assign({borderRadius: "0px", height: "2.5vh", width: "101%", borderLeft: "solid black 2px", borderRight: "solid black 2px"}, !i ? {borderTopLeftRadius: "6.25px", borderTopRightRadius: "6.25px"} : {}, v == selectedOption ? {boxShadow: "0px 0px 15px 1px #207a91"} : {})} class={`row ${style.selectMenu} ${style.menuRow}`}>
+                    {useBig ? <h3 style={{fontSize: "90%", width: "55%"}} onClick={():void => {
                         console.log('b', selected)
                         onItemSelected(v)
                         console.log('a', selected)
@@ -153,9 +153,9 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                     </div>
                     </div>
             })}
-                <div class={`row ${style.selectMenu} ${style.menuRow}`} style={Object.assign({borderRadius: "0px", marginTop: "0px", borderBottomLeftRadius: "6.25px", borderBottomRightRadius: "6.25px", borderTop: "white solid 2px", paddingBottom: useBig ? "25px" : "3px"}, useBig ? {width: "22vw", height: "2.5vh"} : {})}>
+                <div class={`row ${style.selectMenu} ${style.menuRow}`} style={Object.assign({borderRadius: "0px", marginTop: "0px", borderBottomLeftRadius: "6.25px", borderBottomRightRadius: "6.25px",border: "black solid 2px",  borderTop: "white solid 2px", paddingBottom: useBig ? "25px" : "3px"}, useBig ? {width: "26vw", height: "2.5vh"} : {})}>
                 {useBig ?
-                    <h3 style={{fontSize: "2vw"}}
+                    <h3 style={{fontSize: "90%"}}
                     onClick={():void => {
                         setInfo({
                             date: Date.now(),
@@ -187,7 +187,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
             }
             </div>
         }
-        {useBig ? <h3 style={{fontSize: "2vw"}}>{selectedOption}</h3> : <h6>{selectedOption}</h6>}
+        {useBig ? <h3 style={{fontSize: "90%"}}>{selectedOption}</h3> : <h6>{selectedOption}</h6>}
     </div>}
     </div>
 }
@@ -217,12 +217,12 @@ const SchedualCreator:FunctionComponent = () => {
 
     const days:(keyof schedualTot['layout'])[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
     return <div>{vertMode ? <div class="row">
-        <div class="col">
-            <select value={vertDay}  style={{marginTop: "3vh", fontSize: "2vw", width: "50vw", height: "2.5vh"}} onChange={(e):void => setVertDay((e.target as HTMLInputElement)?.value)}>
+        <div class="col" style={{width: "100vw"}}>
+            <select value={vertDay}  style={{marginTop: "3vh", fontSize: "100%", minHeight: "25px", width: "50vw", height: "2.5vh"}} onChange={(e):void => setVertDay((e.target as HTMLInputElement)?.value)}>
                 {['times'].concat(Object.keys(layout)).map(day => <option key={`opt-${day}`} value={day}>{day[0].toUpperCase() + day.substr(1)}</option>
                 )}
             </select>
-            <div class={vertDay == "times" ? "col" : ""} style={{width: vertDay == "times" ? "80vw" : "100%", marginTop: "6vh"}}>
+            <div class={vertDay == "times" ? "col" : ""} style={{width: vertDay == "times" ? "80vw" : "100%", marginTop: "2vh"}}>
                 {vertDay == "times" ?
                     <div style={{justifyContent:"space-between"}} class="row">
                         <h2 style={{width: "20vw", fontSize: "3.5vw"}}>Period</h2>
@@ -247,7 +247,7 @@ const SchedualCreator:FunctionComponent = () => {
                         </label>
                     : <h2 style={{width: "20vw"}}>{i-shI[i] + 1}</h2>}
 
-                    <input style={{width: "18vw", height: "3vw", margin: "auto 1vw"}}
+                    <input style={{width: "18vw", height: "75%", margin: "auto 1vw"}}
                         type="checkbox"
                         checked={times[i].length == 3}
                         onClick={():void => {
@@ -272,12 +272,12 @@ const SchedualCreator:FunctionComponent = () => {
                         save()
                     }} type="time" />
                 </div>
-                return <div class="row" style={{marginTop: "3vh"}} key={`sh-${i}-${vertDay}`}>
-                    <div class="col"><h2>{currentlyBreak ? times[i][2] : `P-${i - breaks + 1}`}</h2></div>
-                    <div class="col"> {
+                return <div class="row" style={{marginTop: "2vh", width: "100%", height: "9vh"}} key={`sh-${i}-${vertDay}`}>
+                    <div class="col" style={{width: "30%", flex: "0 0 auto"}}><h2>{currentlyBreak ? times[i][2] : `P-${i - breaks + 1}`}</h2></div>
+                    <div class="col" style={{width: "70%", flex: "0 0 auto"}}> {
                         currentlyBreak ? <div class="bar" style={{height: "100%", width: "52%"}}> </div> : <Fragment>
-                        <div class="row" style={{justifyContent: "center"}}>
-                            <h2 style={{marginRight: "3vw", fontSize: "2.2vw", marginTop: "0px"}} onClick={():void => {
+                        <div class="row" style={{justifyContent: "center", height: "45%"}}>
+                            <h2 style={{marginRight: "2vw", fontSize: "100%", margin: "auto 5px"}} onClick={():void => {
                                 const newSh = {...layout}
                                 newSh[vertDay as keyof schedualTot['layout']][i-shI[i]].study = !(newSh[vertDay as keyof schedualTot['layout']][i-shI[i]].study ?? false)
                                 setLayout(newSh)
@@ -288,11 +288,11 @@ const SchedualCreator:FunctionComponent = () => {
                                 newSh[vertDay as keyof schedualTot['layout']][i - shI[i]].location = (e.target as HTMLInputElement).value
                                 setLayout(newSh)
                                 save()
-                            }} value={layout[vertDay as keyof schedualTot['layout']][i - breaks].location} style={{width: "18vw", outline: "0px", height: "3vw", fontSize: "2vw"}} />
+                            }} value={layout[vertDay as keyof schedualTot['layout']][i - breaks].location} style={{width: "18vw", outline: "0px", height: "85%", fontSize: "90%", margin: "auto 0px"}} />
                         </div>
-                        <div class="row" style={{justifyContent: "center", marginTop: "1vh"}}>
+                        <div class="row" style={{justifyContent: "center", marginTop: "1vh", height: "45%"}}>
                             <input
-                                style={{margin: "0.2vw", width: "2.6vw", height: "2.6vw", marginRight: "2vw"}}
+                                style={{height: "85%", marginLeft: "2vw", marginRight: "2vw"}}
                                 type="checkbox"
                                 checked={layout[vertDay as keyof schedualTot['layout']][i-breaks].study}
                                 onClick={():void => {
@@ -353,7 +353,7 @@ const SchedualCreator:FunctionComponent = () => {
                 times.map((v, i) => {
                     if (v.length == 3) breaks++
                     shI[i] = breaks
-                    return <div key={i} style={{marginTop: "3vh"}} class="row">
+                    return <div key={i} style={{marginTop: "2vh"}} class="row">
                     <div class="col">
                         <div class="row">
                             <div class="col" style={{justifyContent: "space-between"}}>
@@ -379,7 +379,7 @@ const SchedualCreator:FunctionComponent = () => {
                             <div class="col">
                                 <label style={{justifyContent: "center"}}>
                                     <h6> Break </h6>
-                                    <input type="checkbox" onClick={():void => {
+                                    <input type="checkbox" style={{width: "100%", margin: "5px auto"}} onClick={():void => {
                                         let t = [...times]
                                         let newSh = {...layout}
                                         if (t[i].length == 3) {
@@ -415,11 +415,11 @@ const SchedualCreator:FunctionComponent = () => {
                     {times[i].length == 3 ?
                     days.map(day => <div class="col" key={`sh-${day}`}> <div class="bar" style={{height: "100%", width: "52%"}}> </div> </div>)
                      : days.map(day => {
-                        return <div class="col" key={`sh-${day}`}>
+                        return <div class="col" style={{height: "8vh"}} key={`sh-${day}`}>
                         <label class="row" style={{justifyContent: "center"}}>
                             <h6> Study Period </h6>
                             <input
-                            style={{margin: "auto 5px"}}
+                            style={{margin: "auto 0px", marginLeft: "4px"}}
                             type="checkbox"
                             checked={layout[day][i-breaks].study}
                             onClick={():void => {
@@ -428,8 +428,8 @@ const SchedualCreator:FunctionComponent = () => {
                             }}
                             />
                         </label>
-                        <label>
-                            <input style={{borderRadius: "6.25px", width: "4vw", marginBottom: "0.5vh"}} value={layout[day][i - shI[i]].location} onInput={(e):void => {
+                        <label class="row" style={{height: "9vh"}}>
+                            <input style={{borderRadius: "6.25px", width: "4vw", marginBottom: "0.5vh", margin: "auto 0px"}} value={layout[day][i - shI[i]].location} onInput={(e):void => {
                                 const newSh = {...layout}
                                 newSh[day][i - shI[i]].location = (e.target as HTMLInputElement).value
                                 console.log(newSh[day][i - shI[i]].location)
