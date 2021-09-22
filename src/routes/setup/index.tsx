@@ -81,7 +81,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
             <div class="col">
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
                     <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}> Id </h4>
-                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%"}}  value={menuInfo.id} onInput={(e):void => {
+                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}}  value={menuInfo.id} onInput={(e):void => {
                         if (!menuInfo.n) return
                         const sh = {...menuInfo}
                         sh.id = (e.target as HTMLInputElement).value
