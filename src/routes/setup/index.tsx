@@ -222,7 +222,7 @@ const SchedualCreator:FunctionComponent = () => {
 
     const save = useCallback(() => {
         localStorage.setItem('sch', makeSch())
-    }, [times, layout, classes])
+    }, [makeSch])
 
     const days:(keyof schedualTot['layout'])[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
     return <div>{vertMode ? <div class="row">
