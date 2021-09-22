@@ -77,7 +77,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
 
     return <div ref={refClick} style={useBig ? {width: "25vw", height: "100%"} : {height: "100%", width: "7.5vw"}} > {menuInfo.on ? <div>
     <div class={style.backDrop} />
-        <div ref={refMenu} class={`row ${style.menuOpen}`} style={{height: "30vh", top: "25vh"}}>
+        <div ref={refMenu} class={`row ${style.menuOpen}`} style={useBig ? {height: "30vh", top: "25vh"} : {}}>
             <div class="col">
                 <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
                     <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}> Id </h4>
