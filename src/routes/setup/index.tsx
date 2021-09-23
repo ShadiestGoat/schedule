@@ -488,7 +488,7 @@ const SchedualCreator:FunctionComponent = () => {
         (vertMode && vertDay != "times") ? <Fragment /> :
         <div class="col" style={{marginTop: vertMode ?  "7vh" : "2.5vh"}}>
             <p>{`Share your schedule`}</p>
-            <input disabled={false} style={{fontSize: "90%", color: "#ffffff6b", background: "transparent", overflowY: "hidden", width: "95vw", margin: "0.5vh auto", overflowX: "scroll", height: "3vh",}} value={`${location.origin}${location.pathname}?ins=${makeSch()}`} />
+            <input disabled={false} style={{fontSize: "90%", color: "#ffffff6b", background: "transparent", overflowY: "hidden", width: "95vw", margin: "0.5vh auto", overflowX: "scroll", height: "3vh",}} value={`${location.origin}${location.pathname}?ins=${encodeURI(makeSch())}`} />
         </div>
     }
     <Link href="/" alt="Home">
