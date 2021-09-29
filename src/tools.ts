@@ -85,7 +85,6 @@ export function useOnClickOutside(ref:RefObject<HTMLDivElement>, handler:(e:Mous
     () => {
       const listener = (event:unknown):void => {
         if (!ref.current || ref.current.contains((event as MouseEvent)?.target as null)) return
-
         handler(event as MouseEvent);
       };
       document.addEventListener("mousedown", listener);

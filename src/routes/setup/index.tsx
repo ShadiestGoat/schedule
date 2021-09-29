@@ -40,7 +40,8 @@ function yoinkClass(layout:schedualTot['layout'], times:schedualTot['times'], p:
 
 
 
-const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:schedualTot['aliases'], remove:(name:string) => void, deselect:() => void, onUpdateAlias:(alias:string, info:schedualTot['aliases']['']) => void, onSelect:() => void, p:number, day:string, selected: boolean, selectedOption:string, onItemSelected: (opt:string) => void}> = ({useBig, deselect, remove, aliases, selectedOption, options, p, day, onSelect, selected, onItemSelected, onUpdateAlias}) => {
+const SelectMenu:FunctionComponent<{useBig?:boolean, onMenuSelected:(state:boolean) => void, disable:boolean, options:string[], aliases:schedualTot['aliases'], remove:(name:string) => void, deselect:() => void, onUpdateAlias:(alias:string, info:schedualTot['aliases']['']) => void, onSelect:() => void, p:number, day:string, selected: boolean, selectedOption:string, onItemSelected: (opt:string) => void}> = (
+    {useBig, deselect, remove, aliases, selectedOption, options, p, day, onSelect, selected, onItemSelected, onUpdateAlias, onMenuSelected, disable}) => {
     const [menuInfo, setInfo] = useState<MenuInfo>({
         id: "",
         on: false,
@@ -55,8 +56,14 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
 
     const refMenu = useRef<HTMLDivElement>(null)
     const refClick = useRef<HTMLDivElement>(null)
+    const [showMenu, setShowMenu] = useState(false)
+    const [showSelMenu, setShowSelMenu] = useState(false)
+    useOnClickOutside(refClick, () => {
+        if (selected && !disable) deselect()
+    })
 
-    useOnClickOutside(refMenu, () => {
+    return <div ref={refClick} style={useBig ? {width: "25vw", height: "100%"} : {height: "100%", width: "7.5vw"}} > {menuInfo.on || showMenu ? <div>
+    <div onClick={() => {
         if (menuInfo.on) {
             setInfo({
             id: "",
@@ -69,70 +76,67 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
             }
             })
             deselect()
+            onMenuSelected(false)
         }
-    })
-    useOnClickOutside(refClick, () => {
-        if (selected) deselect()
-    })
-
-    return <div ref={refClick} style={useBig ? {width: "25vw", height: "100%"} : {height: "100%", width: "7.5vw"}} > {menuInfo.on ? <div>
-    <div class={style.backDrop} />
-        <div ref={refMenu} class={`row ${style.menuOpen}`} style={useBig ? {height: "30vh", top: "25vh"} : {}}>
-            <div class="col">
-                <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
-                    <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}> Id </h4>
-                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}}  value={menuInfo.id} onInput={(e):void => {
-                        if (!menuInfo.n) return
-                        const sh = {...menuInfo}
-                        sh.id = (e.target as HTMLInputElement).value
-                        setInfo(sh)
-                    }} disabled={!menuInfo.n} />
-                </label>
-                <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
-                    <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Teacher </h4>
-                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}} value={menuInfo.newInfo.teacher} onInput={(e):void => {
-                        const newS = {...menuInfo}
-                        newS.newInfo.teacher = (e.target as HTMLInputElement).value
-                        setInfo(newS)
-                    }} />
-                </label>
-                <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
-                    <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Class Name </h4>
-                    <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}}  value={menuInfo.newInfo.class} onInput={(e):void => {
-                        const newS = {...menuInfo}
-                        newS.newInfo.class = (e.target as HTMLInputElement).value
-                        setInfo(newS)
-                    }} />
-                </label>
-                <div class="row" style={{marginTop: "2vh"}}>
-                    <div class="btn btn-p" onClick={():void => {
-                        if (menuInfo.id.trim()) onUpdateAlias(menuInfo.id, {
-                            fullName: menuInfo.newInfo.class,
-                            teacher: menuInfo.newInfo.teacher
-                        })
-                        setInfo({date: 0, id: "", on: false, n: false, newInfo: {teacher: "", class: ""}})
-                    }}>{menuInfo.n ? "Save" : "Update"}</div>
-                </div>
+    }} class={`${style.backDrop} ${menuInfo.on ? style.backDrop1 : style.backDrop2}`} />
+    <div onAnimationEnd={():void => setShowMenu(menuInfo.on)} ref={refMenu} class={`row ${style.menuOpen} ${menuInfo.on ? style.enterMenu : style.exitMenu}`} style={useBig ? {height: "30vh", top: "25vh"} : {}}>
+        <div class="col">
+            <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "1vh"}}>
+                <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}> Id </h4>
+                <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}}  value={menuInfo.id} onInput={(e):void => {
+                    if (!menuInfo.n) return
+                    const sh = {...menuInfo}
+                    sh.id = (e.target as HTMLInputElement).value
+                    setInfo(sh)
+                }} disabled={!menuInfo.n} />
+            </label>
+            <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
+                <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Teacher </h4>
+                <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}} value={menuInfo.newInfo.teacher} onInput={(e):void => {
+                    const newS = {...menuInfo}
+                    newS.newInfo.teacher = (e.target as HTMLInputElement).value
+                    setInfo(newS)
+                }} />
+            </label>
+            <label class="row" style={{justifyContent: "space-between", width: "95%", marginTop: "2vh"}}>
+                <h4 style={{height: "100%", width: "30%", fontSize: "2vw"}}>Class Name </h4>
+                <input style={{height: "100%", width: "65%", margin: "0px 2.5%", fontSize: "90%"}}  value={menuInfo.newInfo.class} onInput={(e):void => {
+                    const newS = {...menuInfo}
+                    newS.newInfo.class = (e.target as HTMLInputElement).value
+                    setInfo(newS)
+                }} />
+            </label>
+            <div class="row" style={{marginTop: "2vh"}}>
+                <div class="btn btn-p" onClick={():void => {
+                    if (menuInfo.id.trim()) onUpdateAlias(menuInfo.id, {
+                        fullName: menuInfo.newInfo.class,
+                        teacher: menuInfo.newInfo.teacher
+                    })
+                    setInfo({date: 0, id: "", on: false, n: false, newInfo: {teacher: "", class: ""}})
+                    onMenuSelected(false)
+                    console.log()
+                }}>{menuInfo.n ? "Save" : "Update"}</div>
             </div>
         </div>
+    </div>
 </div> : <div onClick={():void => {
-        onSelect()
+        console.log(disable)
+        if (!disable) onSelect()
     }} class={`row ${style.selectMenu}`}>
         {
-            <div style={{position: "absolute", zIndex: "99", height: `${selected ? (options.length + 1) * 2.5 : 2.5}vh`, width: useBig ? "26vw" : "7.6vw"}} class="col"> {
-                selected ? <Fragment>
+            <div style={{position: "absolute", zIndex: "99", height: `${selected ? (options.length + 1) * 2.5 : 2.5}vh`, width: useBig ? "26vw" : "7.6vw"}} class={`col`}> {
+                selected || showSelMenu ? <div style={{width: "100%"}} onAnimationEnd={():void => {setShowSelMenu(selected)}}  class={`${selected ? style.menuRowOpen : style.menuRowClose}`}>
                                 {options.map((v, i) => {
-                return <div key={`mn-${v}-${p}-${day}`} style={Object.assign({borderRadius: "0px", height: "2.5vh", width: "101%", borderLeft: "solid black 2px", borderRight: "solid black 2px"}, !i ? {borderTopLeftRadius: "6.25px", borderTopRightRadius: "6.25px"} : {}, v == selectedOption ? {boxShadow: "0px 0px 15px 1px #207a91"} : {})} class={`row ${style.selectMenu} ${style.menuRow}`}>
+                return <div key={`mn-${v}-${p}-${day}`} style={Object.assign({borderRadius: "0px", height: "2.5vh", width: "101%", borderLeft: "solid black 2px", borderRight: "solid black 2px"}, !i ? {borderTopLeftRadius: "6.25px", borderTopRightRadius: "6.25px"} : {}, v == selectedOption ? {boxShadow: "0px 0px 15px 1px var(--menuColor)"} : {})} class={`row ${style.selectMenu}`}>
                     {useBig ? <h3 style={{fontSize: "90%", width: "55%"}} onClick={():void => {
-                        console.log('b', selected)
                         onItemSelected(v)
-                        console.log('a', selected)
                     }}>{v}</h3> :
                     <h6 style={{width: "55%"}} onClick={():void => {
                         onItemSelected(v)
                     }}>{v}</h6>}
                     <div style={{width: "45%", display: "flex", justifyContent: "space-evenly"}}>
-                        <svg height={"100%"} style={{fill: "#fff"}} onClick={():void => {
+                        <svg height={"100%"} style={{fill: "#fff"}} onClick={(e):void => {
+                            e.stopPropagation()
                             setInfo({
                                 id: v,
                                 on: true,
@@ -153,10 +157,12 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                     </div>
                     </div>
             })}
-                <div class={`row ${style.selectMenu} ${style.menuRow}`} style={Object.assign({borderRadius: "0px", marginTop: "0px", borderBottomLeftRadius: "6.25px", borderBottomRightRadius: "6.25px",border: "black solid 2px",  borderTop: "white solid 2px", paddingBottom: useBig ? "25px" : "3px"}, useBig ? {width: "26vw", height: "2.5vh"} : {})}>
+                <div class={`row ${style.selectMenu} OLD`} style={Object.assign({borderRadius: "0px", marginTop: "0px", borderBottomLeftRadius: "6.25px", borderBottomRightRadius: "6.25px",border: "black solid 2px",  borderTop: "white solid 2px", paddingBottom: useBig ? "25px" : "3px"}, useBig ? {width: "26vw", height: "2.5vh"} : {})}>
                 {useBig ?
                     <h3 style={{fontSize: "90%"}}
-                    onClick={():void => {
+                    onClick={(e):void => {
+                        e.preventDefault()
+                        e.stopPropagation()
                         setInfo({
                             date: Date.now(),
                             id: '',
@@ -167,10 +173,13 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                                 teacher: ""
                             }
                         })
+                        onMenuSelected(true)
                     }}
                     >Add new</h3> :
                     <h6 class={`row ${style.selectMenu}`}
-                    onClick={():void => {
+                    onClick={(e):void => {
+                        e.preventDefault()
+                        e.stopPropagation()
                         setInfo({
                             date: Date.now(),
                             id: '',
@@ -181,9 +190,10 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, options:string[], aliases:s
                                 teacher: ""
                             }
                         })
+                        onMenuSelected(true)
                     }}>Add new</h6>}
                 </div>
-                </Fragment> : <Fragment />
+                </div> : <Fragment />
             }
             </div>
         }
@@ -208,6 +218,7 @@ const SchedualCreator:FunctionComponent = () => {
     const [menuOpen, setMenuOpen] = useState<string>('999')
     const [vertMode, setVerticalMode] = useState<boolean>(getV())
     const [vertDay, setVertDay] = useState<string>("times")
+    const [menuSelected, setMenuSelected] = useState<boolean>(false)
 
     useGlobalListener('resize', () => {
         if (vertMode != getV() && vertMode) setVertDay("times")
@@ -313,6 +324,8 @@ const SchedualCreator:FunctionComponent = () => {
                                 />
                             <SelectMenu
                                 aliases={classes}
+                                disable={menuSelected}
+                                onMenuSelected={(st):void => {setMenuSelected(st); console.log(st)}}
                                 useBig={true}
                                 remove={(name):void => {
                                     const newCl = {...classes}
@@ -449,6 +462,8 @@ const SchedualCreator:FunctionComponent = () => {
 
                         <SelectMenu
                             aliases={classes}
+                            disable={menuSelected}
+                            onMenuSelected={(st):void => {setMenuSelected(st);console.log(`${st} st`)}}
                             useBig={false}
                             remove={(name):void => {
                                 const newCl = {...classes}

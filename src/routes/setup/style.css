@@ -1,12 +1,19 @@
-.selectMenu {
-    width: 101%;
-    background-color: #207a91;
-    border-radius: 6.5px;
-    height: 100%;
+:root {
+    --menuColor: #207a91
 }
 
-.menuRow {
-    animation: transitmenu 0.75s;
+.selectMenu {
+    width: 101%;
+    background-color: var(--menuColor);
+    border-radius: 6.5px;
+}
+
+.menuRowOpen {
+    animation: transitmenuOpen 0.75s;
+}
+
+.menuRowClose {
+    animation: transitmenuClose 0.75s;
 }
 
 .menuOpen {
@@ -17,29 +24,48 @@
     width: 60vw;
     height: 40vh;
     background-color: #202124;
-    animation: transitmenu 1s;
 }
 
-.clock {
-    color: var(--ico);
-    background-color: var(--main);
-    border-width: 1px;
-    border-color: var(--ico);
-    border-radius: 6.2px;
+.enterMenu {
+    animation: transitmenuOpen 1s;
+}
+
+.exitMenu {
+    animation: testMenu 0.7s reverse;
 }
 
 .clock::-webkit-calendar-picker-indicator {
     display: none;
 }
 
-@keyframes transitmenu {
+@keyframes transitmenuOpen {
     from {
         opacity: 0;
-        transform: translateY(-15px);
+        transform: translateY(-12px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+    }
+}
+
+
+@keyframes transitmenuClose {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes testMenu {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
     }
 }
 
@@ -56,6 +82,19 @@
     }
 }
 
+@keyframes opacExit {
+    from {
+        opacity: 0.8;
+        top: 0vh;
+        height: 100vh;
+    }
+    to {
+        opacity: 0;
+        height: 0vh;
+        top: 60vh;
+    }
+}
+
 .backDrop {
     z-index: 3;
     opacity: 0.8;
@@ -65,5 +104,11 @@
     top: 0;
     position: absolute;
     width: 100vw;
+}
+
+.backDrop1 {
     animation: opac 1s;
+}
+.backDrop2 {
+    animation: opacExit 0.7s;
 }
