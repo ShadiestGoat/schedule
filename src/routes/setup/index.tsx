@@ -63,7 +63,7 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, onMenuSelected:(state:boole
     })
 
     return <div ref={refClick} style={useBig ? {width: "25vw", height: "100%"} : {height: "100%", width: "7.5vw"}} > {menuInfo.on || showMenu ? <div>
-    <div onClick={() => {
+    <div onClick={():void => {
         if (menuInfo.on) {
             setInfo({
             id: "",
@@ -114,7 +114,6 @@ const SelectMenu:FunctionComponent<{useBig?:boolean, onMenuSelected:(state:boole
                     })
                     setInfo({date: 0, id: "", on: false, n: false, newInfo: {teacher: "", class: ""}})
                     onMenuSelected(false)
-                    console.log()
                 }}>{menuInfo.n ? "Save" : "Update"}</div>
             </div>
         </div>
@@ -225,14 +224,14 @@ const SchedualCreator:FunctionComponent = () => {
         setVerticalMode(getV())
     })
 
-    const makeSch = useCallback(() => JSON.stringify({
+    const makeSch = useCallback(():schedualTot => ({
         aliases: classes,
         layout,
         times
     }), [classes, layout, times])
 
-    const save = useCallback(() => {
-        localStorage.setItem('sch', makeSch())
+    const save = useCallback((info:schedualTot = makeSch()) => {
+        localStorage.setItem('sch', JSON.stringify(info))
     }, [makeSch])
 
     const days:(keyof schedualTot['layout'])[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
@@ -337,7 +336,11 @@ const SchedualCreator:FunctionComponent = () => {
                                     const newAl = {...classes}
                                     newAl[alias] = info
                                     setClasses(newAl)
-                                    save()
+                                    save({
+                                        layout,
+                                        times,
+                                        aliases: newAl
+                                    })
                                 }}
                                 deselect={():void => {
                                     setMenuOpen(`999`)
@@ -475,7 +478,11 @@ const SchedualCreator:FunctionComponent = () => {
                                 const newAl = {...classes}
                                 newAl[alias] = info
                                 setClasses(newAl)
-                                save()
+                                save({
+                                    layout,
+                                    times,
+                                    aliases: newAl
+                                })
                             }}
                             deselect={():void => {
                                 setMenuOpen(`999`)
@@ -503,7 +510,7 @@ const SchedualCreator:FunctionComponent = () => {
         (vertMode && vertDay != "times") ? <Fragment /> :
         <div class="col" style={{marginTop: vertMode ?  "7vh" : "2.5vh"}}>
             <p>{`Share your schedule`}</p>
-            <input disabled={false} style={{fontSize: "90%", color: "#ffffff6b", background: "transparent", overflowY: "hidden", width: "95vw", margin: "0.5vh auto", overflowX: "scroll", height: "3vh",}} value={`${location.origin}${location.pathname}?ins=${encodeURI(makeSch())}`} />
+            <input disabled={false} style={{fontSize: "90%", color: "#ffffff6b", background: "transparent", overflowY: "hidden", width: "95vw", margin: "0.5vh auto", overflowX: "scroll", height: "3vh",}} value={`${location.origin}${location.pathname}?ins=${encodeURI(JSON.stringify(makeSch()))}`} />
         </div>
     }
     <Link href="/" alt="Home">
