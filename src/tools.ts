@@ -42,7 +42,7 @@ export const homeClass:fullClassInfo = {
 }
 
 export const unknownClass:classT = {
-    location: "unknown",
+    location: "location",
     subject: "unknown",
     study: false,
 }

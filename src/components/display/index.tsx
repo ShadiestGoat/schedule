@@ -11,7 +11,7 @@ const ClassInfo:FunctionComponent<fullClassInfo & {after?: fullClassInfo}> = ({n
         break: breakName ?? "",
         weekend: "It's the Weekend!"
     }
-    const sub = study ? `But HLs have ${name}` : breakName && after ? `Next up.. ${after?.name} in ${after?.location}` : ""
+    const sub = study ? `But HLs have ${name}` : breakName && after ? after.study ? `Next up.. Study period!`  : `Next up.. ${after?.name} in ${after?.location}` : ""
     return <div>
         <h1 style={{color: specialCases.includes(name) || study ? "#25a125" : ""}}>{study ? specialNames.study : specialCases.includes(name) ? specialNames[name] : name}</h1>
         {specialCases.includes(name) || sub ? <Fragment /> : <h2>{`In ${location}`}</h2>}
