@@ -80,8 +80,10 @@ const IndexPage:FunctionComponent = () => {
     let curClass:fullClassInfo;
     let nextClass:fullClassInfo;
     let after:fullClassInfo | undefined;
-
-    if (period.p == 99) {
+    if ([0, 6].includes(new Date().getDay())) {
+        curClass = weekend
+        nextClass = weekend
+    } else if (period.p == 99) {
         day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'][new Date().getDay() - (getOffset(schedual.times[0][0]) > now ? 1 : 0)] as keyof schedualTot['layout']
         if (Object.keys(schedual.layout).includes(day)) {
             const { location, subject, study } = schedual.layout[day][0]
